@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" href="data:,">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Hangman</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+
+    <main>
+      <section id="headerSection" class="leftSection">
+        <h1>Hangman</h1>
+      </section>
+
+      <section id="statsSection" class="rightSection">
+        <button id="resetButton">Reset</button>
+        <p>Games: <span id="statsGames"></span></p>
+        <p>Wins: <span id="statsWins"></span></p>
+        <p>Losses: <span id="statsLosses"></span></p>
+      </section>
+      
+      <section id="lettersSection" class="leftSection">
+        
+        <div id="correctLettersContainer">
+          <p></p>
+          <figure id="correctLetters"></figure>
+        </div>
+
+        <div id="incorrectLettersContainer">
+          <p>Incorrect</p>
+          <figure id="incorrectLetters"></figure>
+        </div>
+      
+      </section>
+  
+      <section id="hangmanFigureSection" class="rightSection">
+        <div id="timer"></div>
+        <button id="startButton">Start</button>
+
+        <figure id="hangmanFigure">
+        </figure>      
+      </section>
+    
+    </main>
+
+    <!--script-->
+    <script src="assets/wordbank/words.js"></script>
+    <script src="assets/js/script.js"></script>
+
+  </body>
+</html>

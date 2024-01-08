@@ -1,0 +1,61 @@
+body {
+  width: 100%;
+  margin: auto;
+  padding: 0px;
+}
+main {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px;
+  justify-content: center;
+}
+section {
+  width: 40%;
+  padding: 10px;
+  border: 1px dotted black;
+}
+h1 {
+  text-align: center;
+}
+.leftSection {
+  width: 55%
+}
+.rightSection {
+  width: 30%;
+}
+button {
+ float: right; 
+}
+
+/*letters section*/
+.input-letters {
+  text-decoration: underline;
+  margin: 3px;
+}
+.input-incorrect-letters {
+  text-decoration: underline;
+  margin: 3px;
+}
+#correctLettersContainer {
+  border-bottom: 1px dotted black;
+  width: 100%;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+#incorrectLettersContainer {
+  border-bottom: 1px dotted black;
+  width: 100%;
+}
+#incorrectLetters {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/*time & hangman figure section*/
+#timer {
+  float: left;
+}
+#hangmanFigure {
+  padding: 10px;
+  text-align: center;
+}
