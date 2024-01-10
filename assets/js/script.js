@@ -9,7 +9,6 @@ let statsLosses = 0
 // on load, update stats
 document.addEventListener("DOMContentLoaded", () => {
     updateStats()    
-    document.getElementById('yourButtonId').addEventListener('click', focusInput);
 })
 
 function resetCorrectLettersDisplay (){
@@ -26,8 +25,11 @@ function resetCorrectLettersDisplay (){
     }
 }
 
-function keyCheck (event) {
-    userInput = event.key.toUpperCase()
+function keyCheck (userInput) {
+    console.log(userInput)
+    
+    // virtual keyboard
+    let keyboardKeySpan = document.getElementById(userInput)
 
     // userInput is in the currentWord and not already guessed
     if ( (currentWord.includes(userInput)) && ((correctLetters.includes(userInput) == false))) {
@@ -41,6 +43,9 @@ function keyCheck (event) {
                 letterInput.textContent = userInput
             }
         }
+
+        // green correct letters
+        keyboardKeySpan.style.backgroundColor = "green"
 
         //check for win
         isWin = true
@@ -71,6 +76,9 @@ function keyCheck (event) {
             letterInput.setAttribute("class", "input-incorrect-letters");
             incorrectLettersDisplay.appendChild(letterInput)
         }
+
+        // blacken incorrect letters
+        keyboardKeySpan.style.backgroundColor = "rgb(63, 63, 63)"
 
         //draw hangman
         drawHangman(incorrectLetters.length)
@@ -125,10 +133,30 @@ startButton.addEventListener("click", () => {
     correctLetters = []
     incorrectLetters = []
     document.getElementById("incorrectLetters").innerHTML = ""
-    document.addEventListener("keydown", keyCheck)
     drawHangman(0)
     startTimer()
+
+    //reset keyboard
+    for (let r = 0 ; r < keyboardRows.length; r++) {
+        for (let i = 0; i < keyboardRows[r].length; i++) {
+            let span = document.querySelector(`#${keyboardRows[r][i]}`)
+            span.style.backgroundColor = "darkgrey"
+        }
+    }
+
+    //add event listeners
+    document.addEventListener("keydown", handleKey)
+    keyboardDiv.addEventListener("click", handleClick) 
 })
+
+function handleKey (event) {
+    userInput = event.key.toUpperCase()
+    keyCheck(userInput)
+}
+function handleClick(event) {
+    userInput = event.target.id
+    userInput? keyCheck (userInput): null
+}
 
 // Stats
 function updateStats() {    
@@ -151,7 +179,8 @@ function endGame(result) {
 
     //disabled game play
     clearInterval(timerInterval)
-    document.removeEventListener("keydown", keyCheck)
+    document.removeEventListener("keydown", handleKey)
+    keyboardDiv.removeEventListener("click", handleClick)
 
     //reveal letters
     for (let i = 0; i < currentWord.length; i++) {
@@ -178,7 +207,7 @@ function endGame(result) {
 
 // Timer
 function startTimer (){
-    let timer = 60
+    let timer = 90
     document.getElementById("timer").innerHTML = `Time: ${timer}`
     timerInterval = setInterval(() => {
         if (timer === 0) {
@@ -204,3 +233,4 @@ document.body.appendChild(input);
 function focusInput() {
     input.focus()
 }
+
